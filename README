@@ -1,0 +1,68 @@
+This is the README file for Allie Robbins' OS Assignemnt 1 
+
+
+
+This project is based on Exercise 3.9 in the UNIX SYSTEMS Programming book.
+
+
+
+List of Files included in program:
+	
+	~runsim
+	
+	~testsim
+	
+	~testing.data
+	
+	~Makefile
+	
+	~README
+
+
+
+Purpose of program:
+	
+	This program is an expansion of the fan structure as written in Program 3.2 from the textbook through the use of a batch processing facility called runsim. The 	goal of the assignment as given by Prof. Bhatia is "to become familiar with the environment in hoare while pracitcing system calls." 
+
+
+
+Outline of runsim program:
+	
+	The program runsim takes in exactly 1 command-line arg which represents the MAX # of executionsthat can be run concurrently. The program then:
+
+	1. Checks for the appropriate command-line arg
+ 
+	2. Initializes prL from the command-line
+
+		-prL being the max # of children allowed to execute @ a time
+
+	3. Variable prC is set to 0
+		
+		- prC being a counter for the # of active child processes
+	
+	4. Executes the main loop 
+		
+		-Checks that prL == prC
+		
+		-Reads input & forks child accordingly
+			
+			~Child process executes the testsim program to run data from testing.data
+		
+		-Increment prC
+		
+		-Checks for zombie children
+	
+	5. @ EOF, the program waites for all the child process to finishes, then exits
+
+
+
+Outline of testsim program:
+	
+	The program testsim takes in 2 command-line args which are the sleep time and repeat factors respectively. The program then:
+
+	1. Loops (repeat factor) times
+
+	2. In the loop, the testsim program sleeps for the specified sleep time
+	
+	3. After the sleep time, a message is outputed with the process ID to std output 
+

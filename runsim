@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+#ifndef MAX_CANON
+#define MAX_CANON 8192
+#endif
+
+int main (int argc, char *argv[]) {
+          
+        if (argc != 2) {	//check for correct argc	
+                fprintf(stderr, "Usage: %s processes\n", argv[0]);	//output error message
+                return 1; }	// return 1 to exit program 
+	
+	pid_t childpid = 0;
+	int i,		//variable for FOR loop
+	    num,	//variable for n # processes
+ 	    opt;	//variable option detection
+
+	int prL = argc;		//variable for Limit of child processes
+	int prC = 0;		//counter of child processes 
+       
+			//need to collect data from testing.data
+	
+	for (i = 1, i < num; i++){	//loop for num (n) processes
+        	
+		if(prL == prC) {	//if limit equals count
+			childpit = wait(NULL);		//wait for child process to finish
+			if (childpid != -1)
+				printf("Waited for child with pid %ld\n", childpid);
+			prC--; }	//decrement count
+		
+		if ((childpid = fork()) <= 0){	//create child processes
+                        break;}
+			
+			//code to connect to testsim program here
+				
+		if ((waitpid( -1, &status, WNOHANG)) != 0) { 	// check for zombie children & terminate
+			prC--;
+		}
+	
+        fprintf(stderr, "i%d process ID:%ld parent ID:%ld child ID:%ld\n",	//print process IDs
+                i, (long)getpid(), (long)getppid(), (long)childpid);
+
+        return 0;	//end
+}       
